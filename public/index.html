@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Wall Paint Visualizer</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" onclick="showPage('home');return false;"><span class="brand-mark">B</span>Smart Wall
+      Paint</a>
+    <nav>
+      <a href="/">Visualizer</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <section id="homePage" class="page active">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">YOUR SPACE. YOUR COLOUR.</span>
+          <h1>Find the colour<br><em>that feels like home.</em></h1>
+          <p>Preview beautiful wall colours on your own room photo. Experiment freely, save your favourite looks and
+            make confident design decisions.</p>
+          <div class="hero-note"><span class="note-dot"></span> Simple tools. Endless possibilities.</div>
+        </div>
+        <div class="hero-image-wrap">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=85"
+            alt="Warm modern living room">
+          <div class="image-caption"><span class="caption-swatch"></span>
+            <div><strong>Warm minimal</strong><small>A little calm, a lot of character</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- LEFT: canvas -->
+    <section>
+      <div class="panel">
+        <div class="toolbar" style="margin: 0 0 12px">
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" />
+        </div>
+
+        <div class="canvas-wrap" id="canvasWrap">
+          <div class="placeholder" id="placeholder">
+            Upload a photo of your room to start.<br />
+            Then click around a wall to outline it.
+          </div>
+          <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="toolbar">
+          <button id="finishBtn" disabled>✔ Finish wall</button>
+          <button id="undoPointBtn" disabled>↶ Undo point</button>
+          <button id="clearBtn" disabled>Clear all</button>
+          <label style="margin-left:auto; display:flex; align-items:center; gap:6px; font-size:0.9rem;">
+            <input type="checkbox" id="guidesToggle" checked /> Show outlines
+          </label>
+        </div>
+        <p class="hint">
+          Click to place corner points around a wall. Click the first point (or press
+          <strong>Finish wall</strong> / double-click) to close the shape. Pick a colour to paint it.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h2>Save &amp; download</h2>
+        <label class="field">Project title
+          <input type="text" id="titleInput" placeholder="e.g. Living room option 1" />
+        </label>
+        <div class="toolbar">
+          <button class="primary" id="saveBtn" disabled>💾 Save project</button>
+          <button id="downloadBtn" disabled>⬇ Download PNG</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: controls -->
+    <aside>
+      <div class="panel">
+        <h2>Colours</h2>
+        <div class="swatches" id="swatches"></div>
+        <div class="current-color">
+          <div class="chip" id="chip"></div>
+          <span id="chipName">Pick a colour</span>
+        </div>
+        <label class="field">Or choose your own
+          <input type="color" id="customColor" value="#3d7ea6" />
+        </label>
+      </div>
+
+      <div class="panel">
+        <h2>Walls</h2>
+        <ul class="wall-list" id="wallList"></ul>
+        <p class="empty" id="wallEmpty">No walls yet.</p>
+        <p class="hint">Select a wall in the list, then click a colour to repaint it.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Paint look</h2>
+        <label class="field">Intensity: <span id="opacityVal">85</span>%
+          <input type="range" id="opacity" min="20" max="100" value="85" />
+        </label>
+        <label class="field">Blend mode
+          <select id="blend">
+            <option value="multiply">Realistic (keeps shadows)</option>
+            <option value="overlay">Soft overlay</option>
+            <option value="source-over">Flat colour</option>
+          </select>
+        </label>
+      </div>
+    </aside>
+  </main>
+
+  <section class="section">
+    <div class="panel">
+      <h2>Saved projects</h2>
+      <div class="gallery" id="gallery"></div>
+      <p class="empty" id="galleryEmpty">Nothing saved yet.</p>
+    </div>
+  </section>
+
+  <footer><a class="brand" href="#"><span class="brand-mark">B</span> SMART WALL PAINT</a><span>Make room for a little
+      colour.</span>Smart Wall Paint Visualizer · Binayak project</footer>
+  <div id="toast" class="toast"></div>
+  <script src="/js/app.js"></script>
+</body>
+
+</html>
